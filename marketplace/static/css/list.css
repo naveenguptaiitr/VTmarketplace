@@ -1,0 +1,318 @@
+
+/*
+Setting up view properties for the content of the all item page
+*/
+
+/*
+setting up the content class view
+*/
+.content{
+    margin-top:20px;
+    width: 100%;
+}
+
+/*styling the no item case */
+.no-item-message{
+    padding:20px;
+}
+
+/*styling the no item*/
+.no-item-message h2{
+    text-align: center;
+    font-size: x-large;
+    color: var(--font-icon-color);
+}
+
+/*
+setting up the container view for the items
+*/
+.all-item-content{
+    display: flex;
+    width: 90%;
+    margin:50px auto;
+}
+
+/*
+styling first child of the side navigation class
+*/
+
+#sideTabNavigation:first-child{
+
+    margin-top:20px;
+}
+
+/*
+styling side navigation class
+*/
+
+.side-navigation{
+    text-decoration: none;
+    padding:5px 15px;
+    width: 200px;
+    display: block;
+    position: relative;
+    border-top: 1px solid black;
+    border-left: 1px solid black;
+}
+
+/*
+styling last child of the side navigation class
+*/
+
+.side-navigation:last-child{
+    border-bottom: 1px solid black;
+}
+
+/*
+styling side navigation class to highlight selected tab
+*/
+
+.side-navigation a.selected{
+    background-color: #f2f0f2;
+    border-right:0px;
+    color: black;
+    text-decoration: underline;
+}
+
+
+.side-navigation a.selected::after{
+    position: absolute;
+    right: -5px;
+    top: 0px;
+    bottom: 0px;
+    background-color: #f2f0f2;
+    width: 10px;
+    z-index: 1;
+    content: "";
+}
+
+/*
+styling the items container view
+*/
+
+.right-side-item-pane{
+    border: 1px solid black;
+    border-radius: 5px;
+}
+
+ul.temp-message{
+    text-align: center;
+    font-size: x-large;
+    color: var(--font-icon-color);
+}
+
+
+ul.temp-message li.warning {
+    background-color: lightpink;
+    padding: 1rem;
+}
+
+
+/*
+disabling the mobile items container view for desktop view
+*/
+
+.content-nav-pane-mobile-view{
+    display: none;
+}
+
+/*
+styling the filter to sort items
+*/
+
+.filter{
+    display: flex;
+    align-items: center;
+    justify-content: right;
+    margin: var(--spacing2x) var(--spacing2x) 0 0;
+    cursor: pointer;
+}
+
+.filter img{
+    height:25px;
+}
+
+/*
+styling the display of grid to present items in the page
+*/
+
+.item-display{
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+}
+
+/*
+styling the individual item image
+*/
+
+.individual-item-image{
+    height: 60%;
+    width: 80%;
+    display: flex;
+    justify-content: center;
+}
+
+/*
+styling the individual item image container
+*/
+
+.item-list img{
+   margin: 20px;
+   min-width: 100px;
+   min-height: 100px;
+    aspect-ratio: 1 / 1;
+   object-fit: fill;
+   border-radius: 5px;
+   border: 1px solid #ccc;
+}
+
+/*Added for create/delete button*/
+.item-list div .edit-button img,.item-list div .delete-button img{
+    margin: 20px;
+    aspect-ratio: 0;
+    height: 20px;
+    width: 20px;
+    min-width: 0;
+    min-height: 0;
+}
+
+/*
+styling the individual item image name
+*/
+
+.item-caption{
+    margin-bottom: 5px;
+    text-align: center;
+}
+
+/*
+media query for max-width upto 1200px
+*/
+
+@media screen and (max-width: 1200px) {
+
+     /*
+      disabling the navigation view for desktop
+     */
+
+    .content-nav-pane{
+        display: none;
+    }
+
+    /*
+      enabling the navigation view for mobile view
+     */
+
+    .content-nav-pane-mobile-view{
+        display: contents;
+        margin: 20px auto;
+        width: 95%;
+    }
+
+    /*
+      styling the navigation for item category view for mobile view
+     */
+
+
+    #itemTypes{
+        height: 30px;
+        margin-top: 10px;
+        background-color: #f2f0f2;
+    }
+
+    /*
+      styling the all items image container
+     */
+
+    .right-side-item-pane{
+        border: 1px solid var(--sepator-color);
+        margin-top:30px;
+    }
+
+
+    .all-item-content {
+        flex-direction: column;
+    }
+
+     /*
+      styling the side navigation view for mobile view
+     */
+
+    #sideTabNavigation {
+        display: flex;
+        overflow-y: auto;
+    }
+
+    /*
+      styling the item display view for mobile view
+     */
+
+    .item-display {
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr;
+
+    }
+
+    .individual-item-image{
+        height: 60%;
+        width: 80%;
+    }
+}
+
+/*
+media query for max-width upto 768px
+*/
+@media screen and (max-width: 768px){
+    /*
+      disabling the navigation view for desktop
+     */
+
+    .content-nav-pane{
+        display: none;
+    }
+
+    /*
+      enabling the navigation view for mobile view
+     */
+
+    .content-nav-pane-mobile-view{
+        display: contents;
+        margin: 30px auto;
+        width: 95%;
+    }
+
+    /*
+      styling the all items image container
+     */
+
+    .right-side-item-pane{
+        border: 1px solid var(--sepator-color);
+        margin-top:30px;
+    }
+
+    /*
+      styling the item display view for mobile view
+     */
+
+    .all-item-content{
+        flex-direction: column;
+    }
+
+    /*
+      styling the side navigation view for mobile view
+     */
+
+    #sideTabNavigation{
+        display: flex;
+        overflow-y: auto;
+    }
+
+    .item-display{
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+    }
+    .individual-item-image{
+        height: 60%;
+        width: 80%;
+    }
+}

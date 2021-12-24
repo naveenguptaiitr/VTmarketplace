@@ -1,0 +1,21 @@
+{% load humanize %}
+{% load static %}
+
+{# Loading CSS #}
+{% block page-css %}
+     <link rel="stylesheet" href="{% static "css/feed.css" %}">
+{% endblock %}
+
+<h3 class="activity-heading"> Recent Activity: </h3>
+<ul class="activity-log">
+    {% for action in actions %}
+        {% if action.target != None or "deleted" in action.verb %}
+            <li> - <a href="{% url "users:profile" action.user.username %}">{{ action.user.username}}</a> {{ action.verb }}
+                {% if action.target != None %}"<a href="{{ action.target.get_absolute_url }}"> {{ action.target }} </a>" {% endif %}
+                ({{ action.created|naturaltime }})
+            </li>
+        {% endif %}
+    {% empty %}
+        <li> No Activity Yet.</li>
+    {% endfor %}
+</ul>

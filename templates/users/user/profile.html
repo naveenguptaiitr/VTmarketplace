@@ -1,0 +1,96 @@
+
+{% extends "marketplace/base.html" %}
+{% load static %}
+
+{% block page-title %} Product Detail {% endblock %}
+
+{# Loading the css for the page #}
+
+{% block page-css %}
+    "{% static "css/profile.css" %}"
+{% endblock %}
+
+{# Setting navigation pane customization for logged in and logged out users #}
+{% block nav-pane-set %}
+
+    {% if request.session.username %}
+
+        <a id="home" class="link" href={% url "marketplace:marketplace_home_page" %}>Home</a>
+        <a id="allItems" class="link" href={% url "marketplace:marketplace_list_items" %}>All Items</a>
+        <a id="sell" class="link" href={% url "marketplace:marketplace_add_item" %}>Sell</a>
+
+    {% else %}
+
+        <a id="home" class="link" href={% url "marketplace:marketplace_home_page" %}>Home</a>
+        <a id="allItems" class="link" href={% url "marketplace:marketplace_list_items" %}>All Items</a>
+
+    {% endif %}
+
+{% endblock %}
+
+{# content of the detail page view #}
+{% block content-detail %}
+
+    {% if messages %}
+        <ul class="temp-message">
+            {% for message in messages %}
+                <li {% if message.tags %} class="{{ message.tags }}"{% endif %}> {{ message }}</li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+
+    {# product detail section of the page #}
+    <div class="top-content">
+
+        <h2 id="profile-info">Profile Information </h2>
+
+        {% if request.session.username == user.username or request.session.role == 'admin' %}
+            <a href="{% url "users:profile_edit" user.username %}" class="edit-button"><img src="{% static "img/edit.png" %}"></a>
+        {% endif %}
+
+        <div class="profile-and-actions">
+            <div class="profile-content">
+                <!--This class is to display the multiple images of the item-->
+                <div class="picture-container">
+                    <img src= {% static user.details.profile_pic %} alt="img1" class="picture-container-element" />
+                </div>
+
+                <!--This class is to display the item description-->
+                <div class="user-description">
+
+                    <!--Profile, details, and seller information-->
+                    <div class="user-detail">
+                        <p class="field"> First Name: </p>
+                        <p class="field-value">{{ user.first_name }}</p>
+                    </div>
+                     <div class="user-detail">
+                        <p class="field"> Last Name: </p>
+                        <p class="field-value">{{ user.last_name }}</p>
+                    </div>
+                     <div class="user-detail">
+                        <p class="field"> Username: </p>
+                        <p class="field-value">{{ user.username }}</p>
+                    </div>
+                     <div class="user-detail">
+                        <p class="field"> Role: </p>
+                        <p class="field-value">{{ user.details.role }}</p>
+                    </div>
+                     <div class="user-detail">
+                        <p class="field"> Gender: </p>
+                        <p class="field-value">{{ user.details.gender }}</p>
+                    </div>
+                     <div class="user-detail">
+                        <p class="field"> Email Address: </p>
+                        <p class="field-value">{{ user.email }}</p>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    {% block usersidebar %}
+        {% include "actions/action/feed.html" %}
+    {% endblock %}
+
+{% endblock %}

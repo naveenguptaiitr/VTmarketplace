@@ -1,0 +1,152 @@
+{# Detail view to display detail of an item #}
+
+{% extends "marketplace/base.html" %}
+{% load static %}
+
+{% block page-title %} Product Detail {% endblock %}
+
+{# Loading the css for the page #}
+{% block page-css %}
+    "{% static "css/detail.css" %}"
+{% endblock %}
+
+{# Setting navigation pane customization for logged in and logged out users #}
+{% block nav-pane-set %}
+
+    {% if request.session.username %}
+
+        <a id="home" class="link" href={% url "marketplace:marketplace_home_page" %}>Home</a>
+        <a id="allItems" class="link" href={% url "marketplace:marketplace_list_items" %}>All Items</a>
+        <a id="sell" class="link" href={% url "marketplace:marketplace_add_item" %}>Sell</a>
+
+    {% else %}
+
+        <a id="home" class="link" href={% url "marketplace:marketplace_home_page" %}>Home</a>
+        <a id="allItems" class="link" href={% url "marketplace:marketplace_list_items" %}>All Items</a>
+
+    {% endif %}
+
+{% endblock %}
+
+{# content of the detail page view #}
+{% block content-detail %}
+
+    {% if messages %}
+        <ul class="temp-message">
+            {% for message in messages %}
+                <li {% if message.tags %} class="{{ message.tags }}"{% endif %}> {{ message }}</li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+
+    {# product detail section of the page #}
+    <div class="top-content">
+
+        <!--This class is to display the multiple images of the item-->
+        <div class="picture-container">
+            <img src= {% static item_detail.img_path_1 %} alt="img1" class="picture-container-element" />
+            <img src= {% static item_detail.img_path_2 %} alt="img1" class="picture-container-element" />
+            <img src= {% static item_detail.img_path_3 %} alt="img1" class="picture-container-element" />
+            <img src= {% static item_detail.img_path_4 %} alt="img1" class="picture-container-element" />
+        </div>
+
+        <!--This class is to display the item description-->
+        <div class="product-description">
+
+            <!--Product Name, details, and seller information-->
+            <div class="name-and-edit">
+                <h2 id="productName">{{ item_detail.prod_name }}</h2>
+                 <div class="edit-button-div">
+                    {% if request.session.username == item_detail.prod_seller or request.session.role == 'admin' %}
+                        <a href="{% url "marketplace:edit" item_detail.id %}" class="edit-button"><img src="{% static "img/edit.png" %}"></a>
+                        <a href="{% url "marketplace:delete" item_detail.id %}" class="delete-button"><img src="{% static "img/bin.png" %}"></a>
+                    {% endif %}
+                </div>
+            </div>
+            <h3 id="productUploadTime"> {{ item_detail.date_posted}} </h3>
+            <p id="productTextDetail">{{ item_detail.prod_description }}</p>
+
+            <div class="product-seller-name">
+                <a href="{% url "users:profile" item_detail.user.username %}" class="link">
+                    <img class = "menu-icon" src= {% static "img/email_logo.svg" %} alt="emailicon" />
+                    <p> {{ item_detail.user.username }}</p>
+                </a>
+            </div>
+
+            <!--Product Price-->
+            <div class="product-price">
+                <p id="prodPrice">{{ item_detail.prod_price }}</p>
+                <p id="prodAvailability">Available</p>
+            </div>
+
+            <!--Cart Button-->
+            <div class="cart-buttons">
+                <button>
+                    <img class="menu-icon" src={% static "img/shopping_cart_icon.svg" %} alt="Shoppingcart" />
+                    Add to Cart
+                </button>
+                <button>
+                    <img class="menu-icon" src={% static "img/wishlist.png" %} alt="Wishlistlogo" />
+                    Add to Wishlist
+                </button>
+            </div>
+
+        </div>
+    </div>
+
+    <!--This is the bottom half content of the page-->
+
+    <!--Product recommendation-->
+
+    <h3 id="recommendationHeading">Recommendations</h3>
+
+    <div class="product-recommendation">
+
+        {# iterating over recommended product list created in model #}
+        {% for item in recommendation_product %}
+            <div class="recommendations">
+
+                <a href= {% url "marketplace:marketplace_detail_item" item.id %} class="link">
+                    <img src={% static item.img_path_1 %} alt="Item1" />
+                    <p class = "item-caption"> {{ item.prod_name }} {{ item.prod_price }}</p>
+                </a>
+            </div>
+        {% endfor %}
+    </div>
+
+    <!--Product comments section-->
+    <div class="product-comment">
+
+        <!--Comment Box container-->
+        <div class="comment-box">
+
+            <!--Commented part-->
+            <div class="user-commented">
+                <input type="submit" data-item-id="{{ item_detail.id }}" data-user-name="{{ request.session.username }}"
+                       data-ajax-url="{% url "marketplace:product_read_comment" item_detail.id %}" id="comments-recorded"
+                       value="view comments">
+                <div class = "comments-recorded">
+                </div>
+            </div>
+
+            {% if request.session.username  %}
+
+                <form id="prod-user-comment" action="{% url "marketplace:product_add_comment" item_detail.id %}" method="post" >
+                    <!--New comment that is un-submitted-->
+                    <div class="user-comment">
+                        <input required type="text" placeholder="Users Comment" name = "user_new_comment" id="createUserComment">
+                    </div>
+
+                    <div>
+                        <!--Add Item page-->
+                        <input data-item-id="{{ item_detail.id }}" data-ajax-url="{% url "marketplace:product_add_comment" item_detail.id %}"
+                               data-ajax-url2="{% url "marketplace:product_edit_comment" %}" class="submit-button" type="submit" value="comment">
+                    </div>
+                    {% csrf_token %}
+                </form>
+            {% endif %}
+        </div>
+    </div>
+
+
+{% endblock %}

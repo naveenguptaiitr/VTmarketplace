@@ -1,0 +1,125 @@
+
+/*
+Setting up view properties for add an item page
+*/
+
+/*
+setting up the content class view
+*/
+.form-upload-item{
+    margin: 50px auto;
+    position: relative;
+    width:450px;
+    height: 400px;
+    background-color: white;
+    border-radius: 5px;
+    justify-content: center;
+}
+
+/*styling the heading*/
+.form-upload-item h2{
+    color: var(--font-icon-color);
+    text-align: center;
+    font-size: 1.5rem;
+    padding-top:var(--spacing2x);
+    padding-bottom: var(--spacing2x);
+}
+
+/*styling the upload item to list class*/
+#uploadItemToList{
+    padding-left: var(--spacing2x);
+    padding-right: var(--spacing2x);
+}
+
+/*styling the inputs for adding item*/
+.input-for-add{
+    margin:var(--spacing1x) var(--spacing1x);
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    justify-content: space-evenly;
+}
+.input-for-add input{
+    height:var(--spacing2x);
+}
+
+#submitButton{
+    margin: var(--spacing1x) var(--spacing1x);
+    height: var(--spacing2x);
+}
+#uploadItemToList button{
+    margin: var(--spacing1x) var(--spacing1x);
+    height: var(--spacing2x);
+}
+
+
+
+/* product to sell section styling*/
+.product-to-sale{
+    padding-left: 15px;
+    border-top: 1px solid black;
+    overflow-y: auto;
+}
+
+/* styling the recommendation heading*/
+.product-to-sale h3{
+    margin-top:20px;
+    padding-left: 10px;
+    font-size: 1.4rem;
+    color: var(--font-icon-color);
+}
+
+/* styling the recommendation container*/
+
+.selling-products{
+    display: flex;
+    margin-top:20px;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+/* styling the recommended product image*/
+.selling-products img{
+    margin: 3px 8px;
+    height: 190px;
+    width: 190px;
+    object-fit: cover;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+}
+
+/*
+media query for mobile view
+*/
+
+@media screen and (max-width:768px) {
+
+    /*overwriting the content class defined above*/
+    .form-upload-item{
+        margin: 20px auto;
+        width: 300px;
+    }
+
+    /*overwriting the upload item to list class defined above*/
+    #uploadItemToList{
+        display: flex;
+        flex-direction: column;
+    }
+
+    #uploadImages{
+         height: 30px;
+
+    }
+    .input-for-add{
+        font-size: 0.7rem;
+    }
+
+    #submitButton{
+        margin: var(--spacing1x) var(--spacing1x);
+        height: 30px;
+        width:90px;
+    }
+
+}
+
+
+

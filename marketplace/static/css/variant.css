@@ -1,0 +1,247 @@
+
+/*
+Setting up view properties for the content of the guest page
+*/
+
+/*styling the brand introduction */
+.brand-introduction{
+    margin:20px;
+}
+
+/*styling the brand introduction heading*/
+.brand-introduction h2{
+    text-align: center;
+    font-size: x-large;
+    color: var(--font-icon-color);
+}
+
+/*styling the brand introduction line*/
+.brand-introduction p{
+    text-align: center;
+    color: var(--font-icon-color);
+}
+
+/*styling the residential complex container*/
+.residential-complex{
+    display: grid;
+    padding: 10px;
+    grid-template-columns: 1fr 1fr;
+}
+
+/*styling the residential complex name link */
+.residence-link-wrapper{
+    text-decoration: none;
+    background: transparent;
+    color:var(--link-inactive-color)
+}
+
+.residence-label p{
+    margin: 20px 0px 10px 10px;
+}
+
+.residence-label{
+    font-size: large;
+    font-weight: bold;
+    text-align: center;
+    padding-bottom: 10px;
+}
+
+/* styling the items displayed in the residential complex*/
+.image-container{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    justify-content: center;
+    padding-bottom: 20px;
+}
+
+
+.image-container a{
+    justify-self: center;
+}
+
+.residence-complex-wrapper{
+    background-color: #ffffff;
+    margin: 20px;
+    border-radius: 5px;
+}
+
+/*styling the individual picture in the residential container*/
+.picture-container-element{
+    min-width: 250px;
+    max-height: 250px;
+    aspect-ratio: 1 / 1;
+    padding: 10px;
+    object-fit: fill;
+    justify-self: center;
+}
+
+
+.random-items{
+    border:1px solid black;
+}
+
+/*styling the browse category elements for display*/
+.recommend-category{
+    margin: 3px 8px;
+    height: 240px;
+    width: 300px;
+    object-fit: cover;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+}
+
+.info{
+    width: 50%;
+}
+
+/*styling the browse category heading*/
+.browse-category h3{
+    margin:20px 0px 20px 20px;
+    font-size: 1.4rem;
+    color: var(--font-icon-color);
+}
+
+.category{
+    display: flex;
+    margin-bottom: 40px;
+    text-align: center;
+    overflow-y: auto;
+}
+
+/*disabling in the desktop view*/
+.hide-in-mobile-view{
+    display: block;
+}
+
+
+/*
+media query for max-width upto 1200px
+*/
+@media screen and (max-width: 1200px){
+
+    /*overwriting the class defined above*/
+    .residential-complex{
+        display: grid;
+        padding: 0;
+        grid-template-columns: 1fr;
+    }
+
+
+    .hide-in-mobile-view{
+        display: none;
+    }
+
+    #brandName{
+        font-size: 1.2rem;
+    }
+
+    /*search bar setting on the guest page*/
+    #searchBar{
+        width: 250px;
+        margin-right: 20px;
+    }
+
+    /*account information bar setting on the guest page*/
+    .account-information button{
+        margin-bottom: 10px;
+        height: 30px;
+    }
+
+    .account-information img {
+        height: 30px;
+    }
+
+    .recommend-category{
+        width: 80%;
+        height: 100%;
+    }
+}
+/*media query for mobile view*/
+@media screen and (max-width: 640px){
+
+    /*setting up the root*/
+    :root {
+        --spacing1x: 5px;
+        --spacing2x: 10px;
+    }
+
+    /*
+    overwriting header settings
+    */
+    .header{
+        flex-direction:column;
+    }
+
+    /*
+    overwriting header settings for presenting logo and brand name
+    */
+    .header .title-box{
+        justify-content: center;
+    }
+
+     /*
+    overwriting account-information attributes defined above
+    */
+    .account-information{
+        flex-direction: column;
+    }
+
+    .account-information button{
+        margin-right: 20px;
+        margin-top:10px;
+        height: 30px;
+    }
+
+    #searchBar{
+        width: 250px;
+        margin-right: 20px;
+    }
+
+    #brandName{
+        font-size: 1.5rem;
+    }
+
+    .account-information{
+        margin: 20px 0 10px 0;
+        justify-content: center;
+    }
+    .account-information img {
+        height: 30px;
+    }
+
+    /*
+    overwriting nav-pane display in mobile view
+    */
+
+    .nav-pane{
+        justify-content: space-evenly;
+    }
+
+    /*overwriting the image displayed in the random item class*/
+    .random-items img{
+        width: 80%;
+        min-width: 150px;
+        min-height: 150px;
+    }
+
+    /*overwriting the random item class*/
+    .random-items{
+        display: flex;
+        overflow-y: auto;
+        flex-direction: column;
+    }
+
+    .category img{
+        width: 300px;
+        height: 200px;
+    }
+    .category{
+        display: flex;
+        overflow-y: auto;
+    }
+    .recommend-category{
+        width: 90%;
+        height: 100%;
+    }
+}
+

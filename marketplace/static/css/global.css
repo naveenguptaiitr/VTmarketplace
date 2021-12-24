@@ -1,0 +1,318 @@
+
+/*
+Setting global properties for presentation across all the pages
+*/
+
+/*
+Setting up body properties in global presentation
+*/
+html, body{
+    margin: 0;
+    padding: 0;
+    font-family: 'Open Sans', sans-serif;
+    font-size: 16px;
+    outline: transparent;
+    background-color: #f2f0f2;
+}
+
+/*
+ css variable
+*/
+
+:root {
+  --spacing1x: 10px;
+  --spacing2x: 20px;
+  --link-inactive-color: #3b3c3e;
+  --link-color: #ffffff;
+  --border-color: #cccccc;
+  --sepator-color: rgb(31, 41, 55);
+    --font-icon-color:#861f41;
+}
+
+/*
+setting up the presentation for the account information class to display cart, wishlist, and profile information in suitable style
+in the header of the web page
+*/
+.menu-icon{
+    width: 30px;
+    padding: 0 10px;
+}
+
+/*
+global settings for buttons
+*/
+button{
+    min-width: 100px;
+    min-height: 40px;
+    font-size: 15px;
+    color: var(--link-inactive-color);
+    cursor: pointer;
+}
+
+/*
+global setting for a weblink
+*/
+
+.link {
+    background: transparent;
+    color:var(--link-inactive-color);
+    text-decoration: none;
+}
+
+/*
+global setting for setting up highlight when hovered on a particular option
+*/
+
+.link:hover, .link:focus{
+    text-decoration-color: var(--link-inactive-color);
+}
+
+/*
+set up to highlighted selected menu on the page
+*/
+
+.link.selected {
+      text-decoration: underline;
+      color:var(--link-color);
+      text-decoration-color: var(--link-color);
+     font-weight: 800;
+}
+
+.flex-element{
+    display: flex;
+}
+
+/*
+set up for the header of the page
+*/
+
+.header{
+    background-color: #ffffff;
+    display: flex;
+    justify-content: space-between;
+    padding: var(--spacing2x);
+    border-bottom: 1px solid var(--sepator-color);
+}
+
+/*
+setup to present the logo and brand name on the top left of page
+*/
+
+.header .title-box{
+    display: flex;
+}
+
+/*
+setting up the presentational brand name to be used across all pages
+*/
+
+#brandName{
+    display: flex;
+    margin-left: var(--spacing1x);
+    align-items: center;
+    text-transform: uppercase;
+    font-size: 1.5rem;
+    color: var(--font-icon-color);
+}
+
+/*
+setting up account info related settings
+*/
+
+.account-information{
+    display: flex;
+    align-items: center;
+    margin: 0;
+}
+
+/*
+customizing search bar view
+*/
+
+#searchBarDiv{
+    display: flex;
+}
+
+#searchBar{
+    width: 350px;
+    height: 30px;
+    border-radius: 25px;
+    padding: 0px var(--spacing1x);
+    margin-right: 30px;
+    border: 1px solid var(--border-color);
+    outline: transparent;
+}
+
+#searchBarButton{
+    margin-right: 20px;
+}
+
+/*
+customizing primary navigation menu view
+*/
+
+.nav-pane{
+    background-color: #3b3c3e;
+    color: #ffffff;
+    border-bottom: 1px solid var(--sepator-color);
+    padding: var(--spacing1x) var(--spacing2x);
+    display: flex;
+}
+
+.nav-pane a{
+    color: #ffffff;
+    display: inline-flex;  
+    align-items: center;
+    font-weight: 600;
+    margin-right: var(--spacing2x);
+}
+
+.nav-pane a:hover, .nav-pane a:focus{
+    text-decoration: underline;
+    text-decoration-color: #ffffff;
+}
+ .nav-pane a.selected{
+      text-decoration: underline;
+      color:#fffcb1;
+      text-decoration-color: #fffcb1;
+     font-weight: 800;
+ }
+
+ /*
+ customizing footer display option
+ */
+
+.footer{
+    border-top: 1px solid var(--sepator-color);
+    border-bottom: 1px solid var(--sepator-color);
+    margin-top: var(--spacing2x);
+
+}
+.footer-details{
+    display: flex;
+    padding-bottom: var(--spacing1x);
+    justify-content: space-around;
+    margin-top: 10px;
+}
+
+#aboutUs{
+    padding: 0px 10px;
+    border-right: 1px solid var(--sepator-color);
+}
+
+/*
+media query for max-width upto 1200px
+*/
+
+@media screen and (max-width: 1200px){
+
+    /*
+    overwriting brandname attributes defined above
+    */
+    #brandName{
+        font-size: 1.2rem;
+    }
+    /*
+    overwriting searchbar attributes defined above
+    */
+
+    #searchBarDiv{
+        display: flex;
+        align-items: center;
+    }
+    #searchBar{
+        width: 140px;
+        margin-right: 10px;
+    }
+
+    #searchBarButton{
+     height: 30px;
+    }
+    /*
+    overwriting account-information attributes defined above
+    */
+    .account-information img {
+        height: 30px;
+    }
+}
+
+/*
+media query for upto 768px (as asked in the Project 2 assignments)
+*/
+
+@media screen and (max-width: 768px){
+
+    /*
+    setting up root variables to be used across other pages
+    */
+    :root {
+        --spacing1x: 5px;
+        --spacing2x: 10px;
+    }
+
+    /*
+    overwriting header settings
+    */
+    .header{
+        flex-direction:column;
+    }
+
+    /*
+    overwriting header settings for presenting logo and brand name
+    */
+    .header .title-box{
+        justify-content: center;
+    }
+
+    /*
+    overwriting searchbar attributes defined above
+    */
+    #searchBarDiv{
+        display: flex;
+        align-items: center;
+    }
+    #searchBar{
+        width: 80px;
+        margin-right: 10px;
+    }
+     #searchBarButton{
+      height: 30px;
+    }
+    /*
+    overwriting brandname attributes defined above
+    */
+    #brandName{
+        font-size: 1.5rem;
+    }
+
+    /*
+    overwriting account-information attributes defined above
+    */
+
+    .account-information{
+        margin: 20px 0 10px 0;
+        justify-content: center;
+    }
+
+
+    .account-information img {
+        height: 30px;
+    }
+
+    /*
+    overwriting nav-pane display in mobile view
+    */
+
+    .nav-pane{
+        justify-content: space-evenly;
+    }
+
+    /*
+    overwriting footer display in mobile view
+    */
+
+    .footer-details{
+        justify-content: space-evenly;
+
+    }
+}

@@ -1,0 +1,233 @@
+{# Home View Page #}
+
+{% extends "marketplace/base.html" %}
+{% load static %}
+
+{% block page-title %} Home Page {% endblock %}
+
+{# Loading CSS #}
+{% block page-css %}
+    "{% static "css/home.css" %}"
+{% endblock %}
+
+{# Setting navigation pane customization for logged in and logged out users #}
+
+{% block nav-pane-set %}
+
+    {% if request.session.username %}
+
+        <a id="home" class="link selected" href={% url "marketplace:marketplace_home_page" %}>Home</a>
+        <a id="allItems" class="link" href={% url "marketplace:marketplace_list_items" %}>All Items</a>
+        <a id="sell" class="link" href={% url "marketplace:marketplace_add_item" %}>Sell</a>
+
+    {% else %}
+
+        <a id="home" class="link selected" href={% url "marketplace:marketplace_home_page" %}>Home</a>
+        <a id="allItems" class="link" href={% url "marketplace:marketplace_list_items" %}>All Items</a>
+
+    {% endif %}
+
+{% endblock %}
+
+{# content of the home page view #}
+{% block content-detail %}
+
+    {# content of the home page view for regular user #}
+
+    {% if request.session.role == "regular" %}
+
+        <!--Guest user introduction of the website-->
+        <div class="brand-introduction">
+
+            {% if messages %}
+                <ul class="temp-message">
+                    {% for message in messages %}
+                        <li {% if message.tags %} class="{{ message.tags }}"{% endif %}> {{ message }}</li>
+                    {% endfor %}
+                </ul>
+            {% endif %}
+
+            <h2> Welcome to Virginia Tech MarketPlace</h2>
+            <br />
+            <p>VT MarketPlace is an online platform to buy and sell items within the student community.
+                This is the home page for regular users and the dashboard allows them to track previous
+                orders and also view item for sell.</p>
+        </div>
+
+        <!-- Welcome image to VT Marketplace -->
+        <div class="slideshow-container">
+            <img src={% static "img/VT_Torg_Bridge.jpeg" %} alt="VTTorgersenBridge" />
+        </div>
+
+
+        <div class="user-dashboard">
+            <div class="home-page-heading">
+                <br />
+                <h2> User Dashboard</h2>
+            </div>
+
+            {% block usersidebar %}
+                {% include "actions/action/feed.html" %}
+            {% endblock %}
+
+            <!--Start of the home page content with heading-->
+            <div class="home-page-heading">
+                <h3> Purchase History </h3>
+            </div>
+
+            <div class="dashboard-view">
+                {% for item in purchase_history %}
+                    <div class="dashboard_item">
+                        <a href={% url "marketplace:marketplace_detail_item" item.id %} class="link">
+                            <img src={% static item.img_path_1 %} alt="Item1" />
+                            <p class = "item-caption"> {{ item.prod_name }} {{ item.prod_price }}</p>
+                        </a>
+                    </div>
+                {% endfor %}
+            </div>
+
+            <div class="home-page-heading">
+                <h3>Items For Sell </h3>
+            </div>
+
+            <div class="dashboard-view">
+
+                {% for item in sale_item %}
+                    <div class="dashboard_item">
+                        <a href={% url "marketplace:marketplace_detail_item" item.id %} class="link">
+                            <img src={% static item.img_path_1 %} alt="Item1" />
+                            <p class = "item-caption"> {{ item.prod_name }} {{ item.prod_price }}</p>
+                        </a>
+
+                        <div class="edit-button-div">
+                            {% if request.session.username == item.prod_seller %}
+                                <a href="{% url "marketplace:edit" item.id %}" class="edit-button"><img src="{% static "img/edit.png" %}"></a>
+                            {% endif %}
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+
+        {# content of the home page view for admin user #}
+    {% elif request.session.role == "admin" %}
+
+        <div class="user-dashboard">
+
+            <!--Guest user introduction of the website-->
+            <div class="brand-introduction">
+
+                {% if messages %}
+                    <ul class="temp-message">
+                        {% for message in messages %}
+                            <li {% if message.tags %} class="{{ message.tags }}"{% endif %}> {{ message }}</li>
+                        {% endfor %}
+                    </ul>
+                {% endif %}
+
+                <h2> Welcome to Virginia Tech MarketPlace</h2>
+                <br />
+                <p>VT MarketPlace is an online platform to buy and sell items within the student community.
+                    This is the admin home page and the dashboard allows to add, edit, and delete item from the database.
+                    In addition you can also buy and sell items like a regular user.</p>
+            </div>
+
+             <!-- Welcome image to VT Marketplace -->
+            <div class="slideshow-container">
+                <img src={% static "img/VT_Torg_Bridge.jpeg" %} alt="VTTorgersenBridge" />
+            </div>
+
+            <div class="home-page-heading">
+                <br />
+                <h2> Admin Dashboard</h2>
+            </div>
+
+            {% block adminsidebar %}
+                {% include "actions/action/feed.html" %}
+            {% endblock %}
+
+            <div class="home-page-heading">
+                <div class = admin-control>
+                    <a href={% url "marketplace:marketplace_add_item" %}><h2> Add an item </h2></a>
+                    <a href={% url "marketplace:marketplace_list_items" %}><h2> Edit Item </h2></a>
+                    <a href={% url "marketplace:marketplace_list_items" %}><h2> Delete item </h2></a>
+                </div>
+            </div>
+
+            <!--Start of the home page content with heading-->
+            <div class="home-page-heading">
+                <h3> Purchase History </h3>
+            </div>
+
+            <div class="dashboard-view">
+                {% for item in purchase_history %}
+                    <div class="dashboard_item">
+                        <a href={% url "marketplace:marketplace_detail_item" item.id %} class="link">
+                            <img src={% static item.img_path_1 %} alt="Item1" />
+                            <p class = "item-caption"> {{ item.prod_name }} {{ item.prod_price }}</p>
+                        </a>
+                    </div>
+                {% endfor %}
+            </div>
+
+            <div class="home-page-heading">
+                <h3>Items For Sell </h3>
+            </div>
+
+            <div class="dashboard-view">
+
+                {% for item in sale_item %}
+                    <div class="dashboard_item">
+                        <a href={% url "marketplace:marketplace_detail_item" item.id %} class="link">
+                            <img src={% static item.img_path_1 %} alt="Item1" />
+                            <p class = "item-caption"> {{ item.prod_name }} {{ item.prod_price }}</p>
+                        </a>
+                    </div>
+                {% endfor %}
+            </div>
+
+        </div>
+
+
+        {# content of the home page view for guest users #}
+    {% else %}
+
+         <!--Guest user introduction of the website-->
+        <div class="brand-introduction">
+
+             {% if messages %}
+                <ul class="temp-message">
+                    {% for message in messages %}
+                        <li {% if message.tags %} class="{{ message.tags }}"{% endif %}> {{ message }}</li>
+                    {% endfor %}
+                </ul>
+            {% endif %}
+
+            <h2> Welcome to Virginia Tech MarketPlace</h2>
+            <br />
+            <p>VT MarketPlace is an online platform to buy and sell items within the student community.
+                Sign up to buy and sell items with other users. </p>
+        </div>
+
+        <!-- Welcome image to VT Marketplace -->
+        <div class="slideshow-container">
+            <img src={% static "img/VT_Torg_Bridge.jpeg" %} alt="VTTorgersenBridge" />
+        </div>
+    {% endif %}
+
+    <div class="home-page-heading">
+            <h3>New Listings </h3>
+        </div>
+
+        <div class="item-display">
+            {% for item in new_listing %}
+                <div class="dashboard_item">
+                    <a href={% url "marketplace:marketplace_detail_item" item.id %} class="link">
+                        <img src={% static item.img_path_1 %} alt="Item1" />
+                        <p class = "item-caption"> {{ item.prod_name }} {{ item.prod_price }}</p>
+                    </a>
+                </div>
+            {% endfor %}
+        </div>
+
+{% endblock %}

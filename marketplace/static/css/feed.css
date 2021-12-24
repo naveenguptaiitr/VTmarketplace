@@ -1,0 +1,18 @@
+
+/*
+Setting up view properties for feed for users
+*/
+
+.activity-heading{
+    padding: var(--spacing2x);
+    color: var(--font-icon-color);
+    font-size: 1.3rem;
+}
+
+.activity-log{
+    padding-left: var(--spacing2x);
+}
+
+.activity-log li{
+    padding: calc(0.5*var(--spacing1x));
+}

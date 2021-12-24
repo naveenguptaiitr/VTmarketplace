@@ -1,0 +1,77 @@
+{# Add view to add an item to list. #}
+
+{% extends "marketplace/base.html" %}
+{% load static %}
+
+{% block page-title %} Create User Account {% endblock %}
+
+{# Loading CSS #}
+{% block page-css %}
+    "{% static "css/register.css" %}"
+{% endblock %}
+
+{# content of the add page view #}
+{% block content-detail %}
+
+    <div class="form-register-account">
+
+        <!--Add Item to List Heading-->
+        <h2 id="addItem"> Create an account</h2>
+
+        <!--To create new item in the list-->
+        <form id="addUserToDB" action="{% url "users:create_account" %}" method="post">
+
+            <div class="user-for-add">
+                <label><b> First Name </b></label>
+                <input required type="text" placeholder= "First Name" name="firstname">
+            </div>
+
+            <div class="user-for-add">
+                <label><b> Last Name </b></label>
+                <input required type="text" placeholder= "Last Name" name="lastname">
+            </div>
+
+            <div class="user-for-add">
+                <label><b> Username </b></label>
+                <input required type="text" placeholder= "username" name="username">
+            </div>
+
+
+            <div class="user-for-add">
+                 <label><b> Email </b> </label>
+                <input required type="text" placeholder="email" name="email">
+            </div>
+
+{#            <div class="user-for-add">#}
+{#                <label><b>Profile Picture</b></label>#}
+{#                <input id="uploadImages" type="file" name = "profile-picture" accept="image/*">#}
+{#                <div id="thumbnailPreview"></div>#}
+{#            </div>#}
+
+{#            <div class="user-for-add">#}
+{#                <label><b> Gender </b> </label>#}
+{#                <div class="gender-option">#}
+{#                    <input id="male-gender"  required type="radio" value="Male" placeholder="Male" name="gender">#}
+{#                    <label for="male-gender">Male</label><br>#}
+{#                    <input id="female-gender"  required type="radio" value="Female" placeholder="Female" name="gender">#}
+{#                    <label for="female-gender">Female</label><br>#}
+{#                    <input id="not-share-gender" required type="radio" value="Not Share" placeholder="Not Share" name="gender">#}
+{#                    <label for="not-share-gender">Not Share</label>#}
+{#                </div>#}
+{##}
+{#            </div>#}
+
+            <!--Product Price-->
+            <div class="user-for-add" id = "priceValidation">
+                <label><b> Password </b></label>
+                <input required type="password" placeholder="password" name="password">
+            </div>
+
+            <!--Add Item page-->
+            <input id="submitButton" type="submit" value="Create Account">
+
+            {% csrf_token %}
+        </form>
+    </div>
+
+{% endblock %}

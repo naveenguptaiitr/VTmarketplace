@@ -1,0 +1,155 @@
+{# List view to display all items. For e.g. here electronic items are displayed #}
+
+{% extends "marketplace/base.html" %}
+{% load static %}
+
+
+{% block page-title %} All Items Listing {% endblock %}
+
+{# Loading CSS #}
+{% block page-css %}
+    "{% static "css/list.css" %}"
+{% endblock %}
+
+{# Setting navigation pane customization for logged in and logged out users #}
+{% block nav-pane-set %}
+
+    {% if request.session.username %}
+
+        <a id="home" class="link" href={% url "marketplace:marketplace_home_page" %}>Home</a>
+        <a id="allItems" class="link selected" href={% url "marketplace:marketplace_list_items" %}>All Items</a>
+        <a id="sell" class="link" href={% url "marketplace:marketplace_add_item" %}>Sell</a>
+
+    {% else %}
+
+        <a id="home" class="link" href={% url "marketplace:marketplace_home_page" %}>Home</a>
+        <a id="allItems" class="link selected" href={% url "marketplace:marketplace_list_items" %}>All Items</a>
+
+    {% endif %}
+
+{% endblock %}
+
+{% block side-tabs %}
+
+    <li class="side-navigation">
+        <a href="#" class="link selected">Electronics</a>
+    </li>
+    <li class="side-navigation">
+        <a href="#" class="link">Furniture</a>
+    </li>
+    <li class="side-navigation">
+        <a href="#" class="link">Collectible Art</a>
+    </li>
+    <li class="side-navigation">
+        <a href="#" class="link">Home and Kitchen</a>
+    </li>
+    <li class="side-navigation">
+        <a href="#" class="link">Miscellaneous</a>
+    </li>
+{% endblock %}
+
+{% block side-tabs-mobile-view %}
+    <!--label created to browse through item categories in mobile view-->
+    <label>Select Category</label>
+    <select id="itemTypes">
+        <option value="Electronics">Electronics</option>
+        <option value="Furniture">Furniture</option>
+        <option value="Collectible Arts">Collectible Arts</option>
+        <option value="Home and Kitchen">Home and Kitchen</option>
+        <option value="Miscellaneous">Miscellaneous</option>
+    </select>
+{% endblock %}
+
+{% block content-detail %}
+
+    <!--Container to host the all items in the page-->
+    <div class="all-item-content">
+
+        <!--container to navigate through item categories in desktop view-->
+        <div class="content-nav-pane">
+
+            <!---Side navigation tabs to browse items of different categories-->
+             <ul id="sideTabNavigation">
+                <li class="side-navigation">
+                    <a href="#" class="link selected">Electronics</a>
+                </li>
+                <li class="side-navigation">
+                    <a href="#" class="link">Furniture</a>
+                </li>
+                <li class="side-navigation">
+                    <a href="#" class="link">Collectible Art</a>
+                </li>
+                <li class="side-navigation">
+                    <a href="#" class="link">Home and Kitchen</a>
+                </li>
+                <li class="side-navigation">
+                    <a href="#" class="link">Miscellaneous</a>
+                </li>
+            </ul>
+        </div>
+
+        <!--container to navigate through item categories in mobile view-->
+        <div class="content-nav-pane-mobile-view">
+
+            <!--label created to browse through item categories in mobile view-->
+            <label>Select Category</label>
+            <select id="itemTypes">
+                <option value="Electronics">Electronics</option>
+                <option value="Furniture">Furniture</option>
+                <option value="Collectible Arts">Collectible Arts</option>
+                <option value="Home and Kitchen">Home and Kitchen</option>
+                <option value="Miscellaneous">Miscellaneous</option>
+            </select>
+        </div>
+
+        <!--This container is created to contain all the items available for sell on the website-->
+        <div class="right-side-item-pane">
+
+
+            {% if messages %}
+                <ul class="temp-message">
+                    {% for message in messages %}
+                        <li {% if message.tags %} class="{{ message.tags }}"{% endif %}> {{ message }}</li>
+                    {% endfor %}
+                </ul>
+            {% endif %}
+
+            <!--if the item list is empty-->
+            {% if item_list.count == 0 %}
+                <div class="no-item-message">
+                    <h2> There are no items in the database </h2>
+                </div>
+            {% else %}
+
+            <!--Filter element to sort the items-->
+            <div class="filter">
+                <a href="{% url "marketplace:sort_item" %}">
+                     <img src= {% static "img/filter_logo.svg" %} alt="sortbyfilter" class="menu-icon" />
+                     Sort by Name
+                </a>
+
+            </div>
+
+            <!--Individual items displayed in all items page-->
+            <div class="item-display">
+                {% for item in item_list %}
+                    <!--individual items available for sell-->
+                    <div class="item-list">
+                        <a href = {% url "marketplace:marketplace_detail_item" item.id %} class="link">
+                            <img src= {% static item.img_path_1 %} alt="Item1" class = "individual-item-image" />
+                            <p class = "item-caption">{{ item.prod_name}} {{ item.prod_price }} </p>
+                        </a>
+                        <div>
+                            {% if request.session.role == "admin" %}
+                                <a href="{% url "marketplace:edit" item.id %}" class="edit-button"><img src="{% static "img/edit.png" %}"></a>
+                                <a href="{% url "marketplace:delete" item.id %}" class="delete-button"><img src="{% static "img/bin.png" %}"></a>
+                            {% endif %}
+                        </div>
+                    </div>
+                {% endfor %}
+        {% endif %}
+        </div>
+    </div>
+    </div>
+
+{% endblock %}

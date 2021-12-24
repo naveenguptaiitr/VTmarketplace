@@ -1,0 +1,34 @@
+{% extends "marketplace/base.html" %}
+{% load static %}
+
+
+
+{# Setting navigation pane customization for logged in and logged out users #}
+{% block nav-pane-set %}
+
+    {% if request.session.username %}
+
+        <a id="home" class="link" href={% url "marketplace:marketplace_home_page" %}>Home</a>
+        <a id="allItems" class="link" href={% url "marketplace:marketplace_list_items" %}>All Items</a>
+        <a id="sell" class="link" href="add.html">Sell</a>
+
+    {% else %}
+
+        <a id="home" class="link" href={% url "marketplace:marketplace_home_page" %}>Home</a>
+        <a id="allItems" class="link" href={% url "marketplace:marketplace_list_items" %}>All Items</a>
+
+    {% endif %}
+
+{% endblock %}
+
+{% block content-detail %}
+
+    <div class="search-result-text">
+        <h2 id="searchResultHeading"> Search Results</h2>
+    </div>
+
+    <div class="search-result-content">
+
+    </div>
+
+{% endblock %}

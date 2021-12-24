@@ -1,0 +1,69 @@
+{# Edit View Page #}
+
+{% extends "marketplace/base.html" %}
+{% load static %}
+
+{% block page-title %} Add Item {% endblock %}
+
+{# Loading CSS #}
+{% block page-css %}
+    "{% static "css/add.css" %}"
+{% endblock %}
+
+{# Setting navigation pane customization for logged in and logged out users #}
+{% block nav-pane-set %}
+
+    <a id="home" class="link" href={% url "marketplace:marketplace_home_page" %}>Home</a>
+    <a id="allItems" class="link" href={% url "marketplace:marketplace_list_items" %}>All Items</a>
+    <a id="sell" class="link" href={% url "marketplace:marketplace_add_item" %}>Sell</a>
+
+{% endblock %}
+
+{# content of the edit page view #}
+{% block content-detail %}
+
+    <div class="form-upload-item">
+        <!--Add Item to List Heading-->
+        <h2 id="addItem">Edit Item</h2>
+
+        <!--To create new item in the list-->
+        <form id="uploadItemToList" action="{% url "marketplace:edit_item" item_list.id %}" method="post">
+            {% csrf_token %}
+            <!--Product Name-->
+            <div class = "input-for-add">
+                 <label><b> Product Name </b></label>
+                <input required type="text" placeholder="Product name" name="product_name" value="{{ item_list.prod_name }}">
+            </div>
+
+            <!--Product Category-->
+            <div class = "input-for-add">
+                <label><b> Product Category </b></label>
+                <select id="itemTypes" name="product_category">
+                        <option value="Electronics">Electronics</option>
+                        <option value="Furniture">Furniture</option>
+                        <option value="Collectible Arts">Collectible Arts</option>
+                        <option value="Home and Kitchen">Home and Kitchen</option>
+                        <option value="Miscellaneous">Miscellaneous</option>
+                </select>
+            </div>
+
+            <!--Product Description-->
+            <div class="input-for-add">
+                 <label><b> Product Description </b> </label>
+                <input required type="text" placeholder="Description" name="product_description" value="{{ item_list.prod_description }}">
+            </div>
+
+            <!--Product Price-->
+            <div class="input-for-add" id = "priceValidation">
+                <label><b> Product Price</b></label>
+                <input id = "inputPriceValidation" required type="text" placeholder="Price" name="product_price" value="{{ item_list.prod_price }}">
+            </div>
+
+            <!--Add Item page-->
+            <input id="submitButton" type="submit" value="Edit Item">
+
+
+        </form>
+    </div>
+
+{% endblock %}

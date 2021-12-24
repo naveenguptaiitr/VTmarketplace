@@ -1,0 +1,113 @@
+
+/*
+styling view properties for the content of the profile page
+*/
+
+.top-content{
+    border-bottom: 1px solid black;
+}
+
+#profile-info{
+    color: var(--font-icon-color);
+    text-align: center;
+    font-size: 1.8rem;
+    padding-top:var(--spacing2x);
+    padding-bottom: var(--spacing2x);
+}
+
+.profile-and-actions{
+    display: flex;
+    align-items: start;
+    justify-content: center;
+}
+
+.user-detail{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+}
+
+.edit-button img{
+    width: 25px;
+    height: 25px;
+    float: right;
+    margin-right: calc(2*var(--spacing2x));
+}
+
+.user-detail .field{
+    font-size: 1.4rem;
+    font-weight: bold;
+    padding-bottom:var(--spacing2x);
+}
+
+.user-detail .field-value{
+    font-size: 1.4rem;
+    padding-left:var(--spacing1x);
+    padding-bottom:var(--spacing2x);
+}
+
+/*
+styling the top content class view
+*/
+.profile-content {
+    display: flex;
+    align-items: center;
+    margin-top: 50px;
+    margin-bottom: 50px;
+}
+
+/*
+styling to display pictures for items
+*/
+.picture-container-element{
+    margin-right: calc(4*var(--spacing2x));
+    height: 300px;
+    width: 300px;
+    object-fit: cover;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+}
+
+
+/*media query for max-width upto 1200px*/
+@media screen and (max-width: 1200px){
+
+    /*overwriting the top content class*/
+    .top-content{
+        padding: var(--spacing2x);
+        flex-direction: column;
+        margin: 0;
+    }
+
+    /*overwriting the top picture container class*/
+    .picture-container{
+        display: flex;
+        overflow-y: auto;
+    }
+
+     /*overwriting the top product comment related classes*/
+    .user-comment textarea, .product-comment h3{
+        margin-left: var(--spacing2x);
+    }
+
+    .product-recommendation{
+        padding-left: var(--spacing2x);
+    }
+}
+
+/*
+media query for max-width upto 768px
+*/
+@media screen and (max-width: 768px){
+
+    /*overwriting the top content class*/
+    .picture-container{
+        display: flex;
+        overflow-y: auto;
+    }
+
+    /*overwriting the top product comment related classes*/
+     .user-comment textarea{
+         height:100px;
+         width:100%;
+    }
+}

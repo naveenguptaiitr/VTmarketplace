@@ -1,0 +1,136 @@
+
+.content{
+    border: 1px solid var(--sepator-color);
+    border-radius: 5px;
+    width: 90%;
+    margin: var(--spacing2x) auto;
+    max-width: 1200px;
+}
+
+#orderDetails{
+    font-size: 1.5rem;
+    margin: 20px 20px;
+    display: flex;
+    justify-content: space-between;
+}
+
+#orderDetails:first-child{
+    margin-left: var(--spacing2x);
+}
+
+
+#orderDetails:last-child{
+    margin-right: var(--spacing2x);
+}
+
+.item-container{
+    display: flex;
+    margin-top: 20px;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: var(--spacing2x);
+}
+
+.product-detail, .price-detail{
+    display: flex;
+}
+.price-detail{
+    min-width: 100px;
+    margin: 0;
+}
+
+.product-detail input, .product-detail img, .product-detail div {
+    margin-right: 10px;
+    display: flex;
+}
+
+.checkbox-wrapper{
+    align-items: center;
+    display: flex;
+    justify-content: center;
+    padding-left: 10px;
+}
+
+.product-name{
+    margin-right: 10px;
+}
+
+.item-price .price, .cart-subtotal-mobile-view{
+    display: none;
+}
+
+.item-container img{
+    margin: 0 30px;
+
+    width: 100px;
+    height: 100px;
+    object-fit: fill;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+
+}
+.item-container textarea{
+    height: 50px;
+}
+
+.item-price{
+    align-items: center;
+}
+
+#checkout{
+    justify-content: end;
+    display: flex;
+}
+
+#checkout button{
+    margin:30px;
+    height: 30px;
+    width: 100px;
+}
+
+@media screen and (max-width: 768px){
+    .item-container{
+        flex-direction: column;
+        margin-top: var(--spacing2x);
+        align-items: initial;
+        border-bottom: 1px solid var(--sepator-color);
+    }
+
+    .product-title textarea{
+        width:50%;
+    }
+
+    .price-detail{
+        padding: var(--spacing2x);
+        justify-content: end;
+    }
+    #cartTotal{
+        display: none;
+    }
+    .item-price .price{
+        display: inline-block;
+        color: #8e7474;
+    }
+    #orderDetail{
+        width: 100%;
+        text-align: center;
+    }
+    .cart-subtotal-mobile-view{
+        display: flex;
+        padding: var(--spacing2x);
+        border-bottom: 1px solid var(--sepator-color);
+        justify-content: right;
+        font-weight: bold;
+    }
+
+
+    #checkout button{
+        width: 100%;
+        margin: var(--spacing2x);
+        height: 40px;
+    }
+
+    .item-container img{
+        height: 55px;
+    }
+}

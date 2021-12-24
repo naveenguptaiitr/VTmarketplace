@@ -1,0 +1,94 @@
+{# Add view to add an item to list. #}
+
+{% extends "marketplace/base.html" %}
+{% load static %}
+
+{% block page-title %} Add Item {% endblock %}
+
+{# Loading CSS #}
+{% block page-css %}
+    "{% static "css/add.css" %}"
+{% endblock %}
+
+{# Setting navigation pane customization for logged in and logged out users #}
+{% block nav-pane-set %}
+
+    <a id="home" class="link" href={% url "marketplace:marketplace_home_page" %}>Home</a>
+    <a id="allItems" class="link" href={% url "marketplace:marketplace_list_items" %}>All Items</a>
+    <a id="sell" class="link selected" href={% url "marketplace:marketplace_add_item" %}>Sell</a>
+
+{% endblock %}
+
+{# content of the add page view #}
+{% block content-detail %}
+
+    <div class="form-upload-item">
+        <!--Add Item to List Heading-->
+        <h2 id="addItem"> Add Item to List</h2>
+
+        <!--To create new item in the list-->
+        <form id="uploadItemToList" action="{% url "marketplace:marketplace_add_item" %}" method="post">
+            {% csrf_token %}
+            <!--Product Name-->
+            <div class = "input-for-add">
+                 <label><b> Product Name </b></label>
+                <input required type="text" placeholder="Product name" name="product_name">
+            </div>
+
+            <!--Product Category-->
+            <div class = "input-for-add">
+                <label><b> Product Category </b></label>
+                <select id="itemTypes" name="product_category">
+                        <option value="Electronics">Electronics</option>
+                        <option value="Furniture">Furniture</option>
+                        <option value="Collectible Arts">Collectible Arts</option>
+                        <option value="Home and Kitchen">Home and Kitchen</option>
+                        <option value="Miscellaneous">Miscellaneous</option>
+                </select>
+            </div>
+
+            <!--Product Description-->
+            <div class="input-for-add">
+                 <label><b> Product Description </b> </label>
+                <input required type="text" placeholder="Description" name="product_description">
+            </div>
+
+            <!--Product Price-->
+            <div class="input-for-add" id = "priceValidation">
+                <label><b> Product Price</b></label>
+                <input id = "inputPriceValidation" required type="text" placeholder="Price" name="product_price">
+            </div>
+
+            <!--Upload images of product-->
+            <div class="input-for-add">
+                <label><b> Upload Image 1 </b> </label>
+                <input id="uploadImages" type="file" name = "item-img-1" accept="image/*">
+                <div id="thumbnailPreview"></div>
+            </div>
+
+            <div class="input-for-add">
+                <label><b> Upload Image 2 </b> </label>
+                <input id="uploadImages" type="file" name = "item-img-2" accept="image/*">
+                <div id="thumbnailPreview"></div>
+            </div>
+
+            <div class="input-for-add">
+                <label><b> Upload Image 3 </b> </label>
+                <input id="uploadImages" type="file" name = "item-img-3" accept="image/*">
+                <div id="thumbnailPreview"></div>
+            </div>
+
+            <div class="input-for-add">
+                <label><b> Upload Image 4 </b> </label>
+                <input id="uploadImages" type="file" name = "item-img-4" accept="image/*">
+                <div id="thumbnailPreview"></div>
+            </div>
+
+            <!--Add Item page-->
+            <input id="submitButton" type="submit" value="Add Item">
+
+
+        </form>
+    </div>
+
+{% endblock %}

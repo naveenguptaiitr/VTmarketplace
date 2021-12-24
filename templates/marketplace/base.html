@@ -1,0 +1,129 @@
+{# base.html file to store common part of html code #}
+
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- This is the head part of the html file for home page-->
+<head>
+    <meta charset="UTF-8">
+    <title>VT MarketPlace | {% block page-title %}{% endblock %}</title>
+    <meta content="width=device-width, initial-scale=1" name="viewport" />
+
+    <link rel="stylesheet" href="{% static "css/global.css" %}">
+    <link rel="stylesheet" href={% block page-css %} {% endblock %} >
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,400;0,600;1,300;1,400&display=swap" rel="stylesheet">
+     <link rel="stylesheet" href="{% static "css/reset.css" %}">
+
+    <script src={% static "JS/jquery-3.6.0.min.js" %}></script>
+    <script src={% static "JS/script.js" %}></script>
+</head>
+
+
+<!--References-->
+<!--Images and data has been taken from the Facebook MarketPlace (https://www.facebook.com/marketplace/?ref=bookmark)-->
+<!--Other images have been taken from Google Images https://www.google.com/imghp?hl=en-->
+<!-- Account Information icons have been taken from https://www.flaticon.com/search?word=shopping%20wishlist&type=icon-->
+<!-- Virginia Tech logo has been downloaded from the website https://brand.vt.edu/identity/logo-guidelines.html-->
+
+
+<!-- This is the body part of the html file for item page-->
+<body>
+
+<!-- This is the header of the all items page-->
+<div class = "header">
+
+    <!-- This is to create logo and brand name on the left side of the header-->
+    <div class="title-box">
+        <img src={% static "img/VT_Logo.svg" %} alt="VTLogo" height = "60" />
+        <h1 id="brandName">MarketPlace</h1>
+    </div>
+
+    <!-- This is to create search bar and account related information on the right side of the header-->
+    <div class="account-information">
+
+        <!--This is to create a searchbar in the header of the page-->
+        <div id = "searchBarDiv">
+            <form action="search.html" method="get">
+            <input type="text" id="searchBar" placeholder="Search keyboard or laptop" name = "search-items">
+                <input id = "searchBarButton" type="submit" name="submit-search" value="Go">
+            </form>
+        </div>
+
+        <!--This is to display cart, wishlist and profile information of the users-->
+
+        {% if request.session.username %}
+
+            <!--Shopping Cart-->
+           <a href="#">
+            <img class="menu-icon" src= {% static "img/shopping_cart_icon.svg" %} alt="Shoppingcart"  />
+            </a>
+
+            <!--Wishlist-->
+            <a href="#">
+            <img class="menu-icon" src= {% static "img/wishlist.png" %} alt="Wishlistlogo" />
+            </a>
+            <!--Account Information-->
+            <a href="#" id="showUserName">
+                <img class="menu-icon" src= {% static "img/profile_icon.svg" %} alt="Userprofile" />
+            </a>
+
+            <p> <a href="{% url "users:profile" request.session.username %}"> <strong> {{ request.session.username }} </strong></a> | <a href="{% url "users:logout" %}">Log out </a> </p>
+
+
+        {% else %}
+            <form id="loginBox" action="{% url "users:login" %}" method="POST">
+                {% csrf_token %}
+                <input type="text" name="username" placeholder="Username">
+                <input type="password" name="password" placeholder="Password">
+                <input type="submit" value="Log in"> or <a href="{% url "users:create_account" %}"> Register </a>
+            </form>
+
+        {% endif %}
+
+
+
+
+
+    </div>
+</div>
+
+<!-- This is the primary navigation page of the all items page-->
+<div class="nav-pane">
+    <nav>
+        {% block nav-pane-set %}
+        {% endblock %}
+    </nav>
+</div>
+
+<!-- This is the main content of the all items page-->
+<div class="content">
+
+{% block content-detail %}
+{% endblock %}
+
+</div>
+
+
+<!-- This is the footer of the all items page -->
+<div class = "footer">
+
+    <!--left side of footer to share contact address-->
+    <div class="footer-details">
+        <div id="emailAddress">
+            <p> Contact: <a href="#" class="link">naveengupta@vt.edu</a> </p>
+        </div>
+
+        <!--right side of footer to share other related information with respect to the website-->
+        <div id="helpDocument">
+            <a id="aboutUs" class="link" href="#">About Us</a>
+            <a id="termsCondition" class="link" href="#">Terms & Conditions</a>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

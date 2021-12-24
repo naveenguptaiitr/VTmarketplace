@@ -1,0 +1,293 @@
+
+/*
+styling view properties for the content of the single item description page
+*/
+
+/*
+styling the top content class view
+*/
+
+.top-content{
+    display:flex;
+    margin-top:50px;
+    margin-bottom: 50px;
+    justify-content: space-around;
+}
+
+ul.temp-message{
+    text-align: center;
+    font-size: x-large;
+    color: var(--font-icon-color);
+}
+
+ul.temp-message li.success {
+    background-color: lightgreen;
+    padding: 1rem;
+}
+
+
+ul.temp-message li.info {
+    background-color: lightblue;
+    padding: 1rem;
+}
+
+/*
+styling the container to display pictures for items
+*/
+
+.picture-container{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    overflow-y: auto;
+}
+
+/*
+styling to display pictures for items
+*/
+.picture-container-element{
+    margin: 3px;
+    height: 220px;
+    width: 220px;
+    object-fit: cover;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+}
+
+/*
+styling the product details for an item
+*/
+
+.name-and-edit{
+    display: flex;
+    align-items: center;
+}
+
+/*Added for create/delete button*/
+.edit-button-div .edit-button img{
+    margin: 20px;
+    aspect-ratio: 0;
+    height: 20px;
+    width: 20px;
+    min-width: 0;
+    min-height: 0;
+}
+
+.edit-button-div .delete-button img{
+    margin: 20px;
+    aspect-ratio: 0;
+    height: 20px;
+    width: 20px;
+    min-width: 0;
+    min-height: 0;
+}
+
+#productName{
+    font-size: 1.5rem;
+    margin-bottom: 10px;
+    text-align: center;
+}
+
+#productUploadTime{
+    margin-bottom: 10px;
+}
+
+#productTextDetail{
+    max-width: 500px;
+    height: 100px;
+    border-radius: 5px;
+    background-color: #f7f7f7;
+    width: 100%;
+}
+
+/* seller name class */
+.product-seller-name a{
+    display: flex;
+    align-items: center;
+    margin-top: 10px;
+    font-size: 1.2rem;
+}
+
+.product-seller-name img{
+    height:30px;
+    padding-right: 10px;
+}
+
+.product-price{
+    display: flex;
+    margin-top: 30px;
+    font-size: 1.4rem;
+    color: var(--link-inactive-color);
+}
+
+#prodPrice{
+    padding-right: 20px;
+    border-right: 1px solid black;
+}
+#prodAvailability{
+    margin-left: 15px;
+}
+
+/* cart buttons styling*/
+.cart-buttons{
+    margin-top: 30px;
+    height: 60px;
+    display: flex;
+}
+
+.cart-buttons button{
+    width: 180px;
+    height: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-right:30px;
+}
+
+
+/* product recommendation section styling*/
+.product-recommendation{
+    display: flex;
+    padding-left: 50px;
+
+    border-bottom: 1px solid black;
+    overflow-y: auto;
+}
+
+/* styling the recommendation heading*/
+#recommendationHeading{
+    padding-left: 50px;
+    padding-top:20px;
+    font-size: 1.4rem;
+    border-top: 1px solid black;
+    color: var(--font-icon-color);
+}
+
+/* styling the recommendation container*/
+
+.recommendations{
+    display: flex;
+    margin-top:20px;
+    margin-bottom: 20px;
+    text-align: center;
+
+}
+
+/* styling the recommended product image*/
+.recommendations img{
+    margin: 3px 8px;
+    height: 190px;
+    width: 190px;
+    object-fit: cover;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+}
+
+.total-comments{
+    display: flex;
+    margin-top:20px;
+    font-size: 1.4rem;
+    color: var(--font-icon-color);
+}
+
+/* styling the product comment section*/
+.total-comments-num{
+    margin-left:50px;
+    margin-right: 10px;
+
+}
+
+/* styling the comment box button */
+.submit-button{
+    margin-left:50px;
+    margin-top:10px;
+}
+
+/*styling the commented part */
+.user-commented{
+    margin-top:20px;
+    margin-left: 50px;
+    align-items: baseline;
+}
+
+
+.comments-recorded{
+    display: flex;
+    margin-top:10px;
+    align-items: baseline;
+}
+
+.view-comment{
+    display: flex;
+    margin-bottom: var(--spacing1x);
+}
+
+#comment-edit-button{
+    min-width: 50px;
+    min-height: 25px;
+    margin-left: 20px;
+}
+
+#comment-delete-button{
+    min-width: 50px;
+    min-height: 25px;
+    margin-left: 20px;
+}
+
+/*styling the new comment submission part*/
+.user-comment-time{
+    font-size: small;
+    margin-left: 10px;
+}
+
+.user-comment input{
+    background-color:#fdfdfd;
+    border-radius: 5px;
+    margin-top:20px;
+    margin-left: 50px;
+    width:95%;
+    height: 50px;
+}
+
+/*media query for max-width upto 1200px*/
+@media screen and (max-width: 1200px){
+
+    /*overwriting the top content class*/
+    .top-content{
+        padding: var(--spacing2x);
+        flex-direction: column;
+        margin: 0;
+    }
+
+    /*overwriting the top picture container class*/
+    .picture-container{
+        display: flex;
+        overflow-y: auto;
+    }
+
+     /*overwriting the top product comment related classes*/
+    .user-comment textarea, .product-comment h3{
+        margin-left: var(--spacing2x);
+    }
+
+    .product-recommendation{
+        padding-left: var(--spacing2x);
+    }
+}
+
+/*
+media query for max-width upto 768px
+*/
+@media screen and (max-width: 768px){
+
+    /*overwriting the top content class*/
+    .picture-container{
+        display: flex;
+        overflow-y: auto;
+    }
+
+    /*overwriting the top product comment related classes*/
+     .user-comment textarea{
+         height:100px;
+         width:100%;
+    }
+}
